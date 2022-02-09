@@ -1,0 +1,36 @@
+/dts-v1/;
+/plugin/;
+/ {
+    compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
+    
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            keypad: arpi_keys {
+                compatible = "gpio-keys";
+                #address-cells = <1>;
+                #size-cells = <0>;
+                gpio-key,wakeup;
+                autorepeat;
+
+                button@pow {
+                    label = "POWER";
+                    linux,code = <116>;
+                    gpios = <&gpio 21 1>;
+                };
+
+                button@vlu {
+                    label = "VOLUME_UP";
+                    linux,code = <115>;
+                    gpios = <&gpio 20 1>;
+                };
+
+                button@vld {
+                    label = "VOLUME_DOWN";
+                    linux,code = <114>;
+                    gpios = <&gpio 16 1>;
+                };
+            };
+        };
+    };
+};
